@@ -1,0 +1,66 @@
+
+<h1 class="text-center bg-dark text-white">Todo Crud</h1>
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="form-group">
+
+        <label for="todoname">Enter Todo</label>
+
+        <input
+          type="text"
+          class="form-control"
+          #todoname
+        >
+
+        <div class="mt-2">
+
+          <button
+            (click)="onAddtodo()"
+            mat-raised-button
+            color="primary"
+            *ngIf="!IsinEditMode"
+            class="btn btn-block">
+            Add Todo
+          </button>
+
+          <button
+            
+            mat-raised-button
+            color="accent"
+            *ngIf="IsinEditMode"
+            class="btn btn-block">
+            Update Todo
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <ul class="list-group">
+
+        <li
+          class="list-group-item d-flex justify-content-between"
+          *ngFor="let todo of todoarr">
+
+          <strong>{{todo.todoname}}</strong>
+
+          <div>
+            <button mat-mini-fab color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-mini-fab color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
