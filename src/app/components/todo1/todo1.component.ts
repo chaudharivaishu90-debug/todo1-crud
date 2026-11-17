@@ -13,6 +13,7 @@ export class Todo1Component implements OnInit {
 
   @ViewChild('todoname')
   todonameRef!: ElementRef;
+  updateId:string| null=null;
 
   IsinEditMode: boolean = false;
 
@@ -24,6 +25,10 @@ export class Todo1Component implements OnInit {
     {
       todoname: 'Js',
       todoId: '112'
+    },
+    {
+      todoname: 'React',
+      todoId: '113'
     }
   ];
 
@@ -48,4 +53,40 @@ export class Todo1Component implements OnInit {
 
     this.snackbar.showSnackbar('New todo created');
   }
+
+
+
+// edit
+onEditTodo(todo:Itodo1){
+  let edobj= this.todoarr.find(t=>t.todoId===todo.todoId);
+  this.todonameRef.nativeElement.value=edobj!.todoname;
+  this.IsinEditMode=true;
+  this.updateId=todo.todoId
+}
+
+
+
+
+//update
+onUpdatetodo(){
+  const getindex= this.todoarr.findIndex(e=> e.todoId=== this.updateId);
+  let updateValue=this.todonameRef.nativeElement.value
+  this.todoarr[getindex].todoname=updateValue;
+      this.snackbar.showSnackbar('todo update sucessfully!!');
+      this.IsinEditMode=false;
+      this.updateId=null;
+      this.todonameRef.nativeElement.value='';
+
+}
+
+//delete
+onDeletetodo(id:string){
+  let getconfirmation=confirm(`Are you sure to delete this todo item with id ${id}`)
+  if(getconfirmation){
+    let index= this.todoarr.findIndex(t=> t.todoId===id)
+    this.todoarr.splice(index,1)
+          this.snackbar.showSnackbar('todo deleted sucessfully!!');
+
+  }
+}
 }
