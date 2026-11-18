@@ -1,0 +1,134 @@
+```html
+<h2 class="text-center alert alert-dark mt-5">
+  <b>Student Task</b>
+</h2>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">Student Form</h3>
+        </div>
+
+        <div class="card-body">
+
+          <h2 class="text-center bg-dark text-white">{{isInEditMode ? 'Update student' : 'Add student'}}</h2>
+
+          <div class="form-group">
+            <label>Firstname</label>
+            <input type="text" class="form-control" #Firstnameref>
+          </div>
+
+          <div class="form-group">
+            <label>Lastname</label>
+            <input type="text" class="form-control" #Lastnameref>
+          </div>
+
+          <div class="form-group">
+            <label>Roll No</label>
+            <input type="text" class="form-control"   maxlength="2"   pattern="[0-9]*"
+#RollNoref>
+          </div>
+
+          <div class="form-group">
+            <label>Class</label>
+            <input type="text" maxlength="1" class="form-control" #Classref>
+          </div>
+
+          <div class="form-group">
+            <label>Is Active</label>
+            <select class="form-control" #isActiveref>
+              <option value="">Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+            <div class="text-center">
+          <button
+            class="btn btn-primary btn btn-sm btn-block  mt-3"
+            *ngIf="!isInEditMode"
+            (click)="OnAddstd()">
+            Add
+          </button>
+
+          <button
+            class="btn btn-dark mt-3"
+            *ngIf="isInEditMode" (click)="onupdateStd()">
+            Update
+          </button>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="table-responsive">
+
+            <table class="table table-bordered mb-0"
+              *ngIf="stdArr.length > 0; else noStudent">
+
+              <thead>
+                <tr>
+                  <th>SrNo</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Roll No</th>
+                  <th>Class</th>
+                  <th>Is Active</th>
+                  <th>Edit</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let std of stdArr; let i = index">
+
+                  <td>{{i + 1}}</td>
+                  <td>{{std.Firstname}}</td>
+                  <td>{{std.LastName}}</td>
+                  <td>{{std.RollNo}}</td>
+                  <td>{{std.Class}}</td>
+
+                  <td class="text-center">
+                    <span class="badge"
+                      [ngClass]="std.isActive ? 'bg-success' : 'bg-danger'">
+                      {{std.isActive ? 'Yes' : 'No'}}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button class="btn btn-sm btn-primary" (click)="onEditstd(std)">
+                      Edit
+                    </button>
+                  </td>
+
+                  <td>
+                    <button class="btn btn-sm btn-danger" (click)="onRemovestd(std)">
+                      Remove
+                    </button>
+                  </td>
+
+                </tr>
+              </tbody>
+
+            </table>
+
+            <ng-template #noStudent>
+              <p class="text-center alert alert-danger">
+                Student Not Added Yet
+              </p>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+```

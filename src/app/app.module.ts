@@ -8,10 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{MatButtonModule} from "@angular/material/button";
 import{MatIconModule} from "@angular/material/icon";
 import{MatSnackBarModule} from "@angular/material/snack-bar";
+import { Student1Component } from './components/student1/student1.component';
 @NgModule({
   declarations: [
     AppComponent,
-    Todo1Component
+    Todo1Component,
+    Student1Component
   ],
   imports: [
     BrowserModule,
