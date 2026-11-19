@@ -16,6 +16,9 @@ export class Todo1Component implements OnInit {
   updateId:string| null=null;
 
   IsinEditMode: boolean = false;
+  trackById(index:number,item:any):number|string{
+    return item.todoId;
+  }
 
   todoarr: Array<Itodo1> = [
     {

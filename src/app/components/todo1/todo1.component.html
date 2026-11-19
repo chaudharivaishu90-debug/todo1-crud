@@ -1,7 +1,9 @@
 
-<h1 class="text-center bg-dark text-white mt-2">Todo Crud</h1>
+<h1 class="text-center bg-dark text-white mt-2">
+  Todo Crud
+</h1>
 
-<div class="container-fluid  mt-5">
+<div class="container-fluid mt-5">
   <div class="row">
 
     <div class="col-md-6">
@@ -12,6 +14,7 @@
         <input
           type="text"
           class="form-control"
+          id="todoname"
           #todoname
         >
 
@@ -27,11 +30,11 @@
           </button>
 
           <button
-            
             mat-raised-button
             color="warn"
             *ngIf="IsinEditMode"
-            class="btn btn-block" (click)="onUpdatetodo()">
+            class="btn btn-block"
+            (click)="onUpdatetodo()">
             Update Todo
           </button>
 
@@ -40,26 +43,49 @@
     </div>
 
     <div class="col-md-6">
-      <ul class="list-group">
+
+      <ul
+        class="list-group"
+        *ngIf="todoarr.length > 0; else notodo">
 
         <li
-          class="list-group-item d-flex justify-content-between"
-          *ngFor="let todo of todoarr">
+          class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let todo of todoarr trackBy:trackById">
 
           <strong>{{todo.todoname}}</strong>
 
           <div>
-            <button mat-mini-fab color="primary" class="me-4" (click)="onEditTodo(todo)">
+
+            <button
+              mat-mini-fab
+              color="primary"
+              class="me-4"
+              (click)="onEditTodo(todo)">
+
               <mat-icon>edit</mat-icon>
+
             </button>
 
-            <button mat-mini-fab color="warn" (click)="onDeletetodo(todo.todoId)">
+            <button
+              mat-mini-fab
+              color="warn"
+              (click)="onDeletetodo(todo.todoId)">
+
               <mat-icon>delete</mat-icon>
+
             </button>
+
           </div>
 
         </li>
       </ul>
+
+      <ng-template #notodo>
+        <p class="alert alert-info">
+          No todos added yet
+        </p>
+      </ng-template>
+
     </div>
 
   </div>
