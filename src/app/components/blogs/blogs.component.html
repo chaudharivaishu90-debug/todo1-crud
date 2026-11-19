@@ -1,0 +1,104 @@
+
+<h1 class="text-center bg-info text-white mt-5">Blog Task</h1>
+
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" class="form-control" id="Title" #TitleRef>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="content">Content</label>
+            <textarea rows="3" class="form-control" id="content" #contentRef></textarea>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="Author">Author</label>
+            <input type="text" class="form-control" id="Author" #AuthorRef>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" #categoryRef>
+          </div>
+
+          <div class="text-center mt-3">
+<button
+            mat-raised-button
+            color="primary"
+            *ngIf="!IsinEditMode"
+            class="btn btn-block" (click)="Addtodo()">
+            Add 
+          </button>
+<button
+            mat-raised-button
+            color="warn"
+            *ngIf="IsinEditMode"
+            class="btn btn-block" (click)="updatBlog()">
+            Update 
+          </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+
+    <ng-container *ngIf="blogsArr.length > 0; else noBlogs">
+
+      <div class="col-md-4 mb-3" *ngFor="let blog of blogsArr; trackBy: trackById">
+        <div class="card">
+
+          <div class="card-header alert alert-info">
+            <h2>{{blog.title}}</h2>
+          </div>
+
+          <div class="card-body">
+            <h2>Category: {{blog.category}}</h2>
+            <p>{{blog.content}}</p>
+            <p class="text-muted small mb-3">
+              By <strong>{{blog.author}}</strong>
+            </p>
+          </div>
+
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <button
+            mat-mini-fab
+         color="primary"
+  aria-label="Edit blog"
+  (click)="EditBlogs(blog)">
+  <mat-icon>edit</mat-icon>
+</button>
+            <button
+  mat-mini-fab
+  color="warn"
+  aria-label="Delete blog"
+  [disabled]="IsinEditMode"
+  (click)="onDeleteblog(blog.id)">
+  <mat-icon>delete</mat-icon>
+</button>      </div>
+
+        </div>
+      </div>
+
+    </ng-container>
+
+    <ng-template #noBlogs>
+      <div class="col-12">
+        <p class="alert alert-info text-center">
+          No Blogs Available
+        </p>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
